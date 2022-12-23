@@ -14,14 +14,14 @@ let sess = {
   resave: false,
   cookie: {
     secure: false,
-    SameSite : "none"
+    maxAge: 24 * 60 * 60 * 1000 * 7,
+    sameSite: 'none'
   }
 }
 
 if (process.env.ENV === 'PRODUCTION') {
   app.set('trust proxy', 1) // trust first proxy
   sess.cookie.secure = true // serve secure cookies
-  sess.cookie.SameSite = "none";
 }
 const bodyParser = require('body-parser');
 app.use(cors({ credentials: true, origin: process.env.ORIGINS }));
