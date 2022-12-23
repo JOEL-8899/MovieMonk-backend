@@ -13,13 +13,15 @@ let sess = {
   secret: process.env.SECRET || "CS5610",
   resave: false,
   cookie: {
-    secure: false
+    secure: false,
+    SameSite : "none"
   }
 }
 
 if (process.env.ENV === 'PRODUCTION') {
   app.set('trust proxy', 1) // trust first proxy
   sess.cookie.secure = true // serve secure cookies
+  sess.cookie.SameSite = "none";
 }
 const bodyParser = require('body-parser');
 app.use(cors({ credentials: true, origin: process.env.ORIGINS }));
